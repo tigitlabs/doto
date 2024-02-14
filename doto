@@ -136,7 +136,7 @@ _task "Running playbook"; _task_done
 if [[ -f $VAULT_SECRET ]]; then
     ansible-playbook --vault-password-file $VAULT_SECRET "main.yml" "$@"
 else
-    ansible-playbook "main.yml" "$@"
+    ansible-playbook --ask-become-pass "main.yml" "$@"
 fi
 
 popd 2>&1 > /dev/null
