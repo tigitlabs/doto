@@ -1,0 +1,28 @@
+---
+- name: Configure host.
+  hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ['always']
+
+  roles:
+    - geerlingguy.pip
+    - devsec.hardening.ssh_hardening
+  vars:
+    ssh_custom_options:
+      - "Include /etc/ssh/ssh_config.d/*"
+    sshd_custom_options:
+      - "AcceptEnv LANG"
+    sftp_enabled: true
+      
+  tasks:
+    - import_tasks: tasks/extra-packages.yml
+      tags: ['extra-packages']
+
