@@ -1,10 +1,13 @@
 ---
 downloads: ~/.ansible-downloads/
 
-pip_packages: []
-- name: cookiecutter
-  state: present # present/absent/latest, default: present
-  version: "0.16.3" # default: N/A
+pip_packages:
+  - name: cookiecutter
+    version: 2.5
 
+apt_packages:
+  - name: git
+  - name: wget
+  - name: curl
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
