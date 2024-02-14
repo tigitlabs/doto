@@ -118,6 +118,15 @@ if ! pip3 list | grep watchdog >/dev/null 2>&1; then
         _cmd "pip3 install watchdog"
 fi
 
+# Generate SSH keys
+if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
+    _task "Generating SSH keys"
+        _cmd "mkdir -p $SSH_DIR"
+        _cmd "chmod 700 $SSH_DIR"
+        _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
+         _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
+fi
+
 chmod o-w ./ansible
 pushd "./ansible" 2>&1 > /dev/null
 _task "Updating Galaxy"

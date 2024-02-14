@@ -11,6 +11,10 @@
       with_fileglob:
         - "{{ playbook_dir }}/config.yml"
       tags: ["always"]
+    - name: Install ssh server with apt
+      apt:
+        name: openssh-server
+        state: present
 
   roles:
     - geerlingguy.pip
