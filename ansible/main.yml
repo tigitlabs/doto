@@ -13,8 +13,16 @@
       tags: ['always']
 
   roles:
-    - role: geerlingguy.pip
-
+    - geerlingguy.pip
+    - devsec.hardening.ssh_hardening
+  vars:
+    ssh_custom_options:
+      - "Include /etc/ssh/ssh_config.d/*"
+    sshd_custom_options:
+      - "AcceptEnv LANG"
+    sftp_enabled: true
+      
   tasks:
     - import_tasks: tasks/extra-packages.yml
       tags: ['extra-packages']
+
