@@ -34,7 +34,7 @@ WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
 
-DOTFILES_LOG="$HOME/.dotfiles.log"
+DOTFILES_LOG="$HOME/.doto.log"
 
 # _header colorize the given argument with spacing
 function _task {
@@ -118,24 +118,6 @@ if ! pip3 list | grep watchdog >/dev/null 2>&1; then
         _cmd "pip3 install watchdog"
 fi
 
-
-# Generate SSH keys
-# if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
-#     _task "Generating SSH keys"
-#         _cmd "mkdir -p $SSH_DIR"
-#         _cmd "chmod 700 $SSH_DIR"
-#         _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
-#         _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
-# fi
-
-# Clone repository
-# if ! [[ -d "$DOTFILES_DIR" ]]; then
-#     _task "Cloning repository"
-#         _cmd "git clone --quiet https://github.com/tigitlabs/dotfiles.git $DOTFILES_DIR"
-# else
-#     _task "Updating repository"
-#         _cmd "git -C $DOTFILES_DIR pull --quiet"
-# fi
 chmod o-w /workspaces/doto/ansible
 pushd "./ansible" 2>&1 > /dev/null
 _task "Updating Galaxy"
