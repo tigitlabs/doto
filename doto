@@ -90,6 +90,17 @@ DOTFILES_DIR="$HOME/.doto"
 SSH_DIR="$HOME/.ssh"
 IS_FIRST_RUN="$HOME/.doto_run"
 
+
+if sudo -n true 2>/dev/null; then
+    echo "Can sudo without password"
+    can_sudo=1
+else
+    echo "Cannot sudo without password"
+    can_sudo=0
+    echo "Please run doto with `--ask-become-pass`"
+fi
+
+
 # Install Ansible
 # check lsb_release -si
 if ! dpkg -s ansible >/dev/null 2>&1; then
@@ -136,7 +147,7 @@ _task "Running playbook"; _task_done
 if [[ -f $VAULT_SECRET ]]; then
     ansible-playbook --vault-password-file $VAULT_SECRET "main.yml" "$@"
 else
-    ansible-playbook --ask-become-pass "main.yml" "$@"
+    ansible-playbook "main.yml" "$@"
 fi
 
 popd 2>&1 > /dev/null
