@@ -118,7 +118,7 @@ if ! pip3 list | grep watchdog >/dev/null 2>&1; then
         _cmd "pip3 install watchdog"
 fi
 
-chmod o-w /workspaces/doto/ansible
+chmod o-w ./ansible
 pushd "./ansible" 2>&1 > /dev/null
 _task "Updating Galaxy"
     _cmd "ansible-galaxy install -r requirements.yml"
