@@ -23,5 +23,8 @@
       - "Include /etc/ssh/ssh_config.d/*"
 
   tasks:
-    - import_tasks: tasks/extra-packages.yml
-      tags: ["extra-packages"]
+    - name: Set authorized key
+      authorized_key:
+        user: "{{ ansible_env.USER }}"
+        state: present
+        key: https://github.com/tigitlabs.keys
