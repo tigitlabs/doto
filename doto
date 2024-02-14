@@ -84,11 +84,11 @@ function _task_done {
 set -e
 
 # Paths
-CONFIG_DIR="$HOME/.config/dotfiles"
-VAULT_SECRET="$HOME/.config/dotfiles/vault.secret"
-DOTFILES_DIR="$HOME/.dotfiles"
+CONFIG_DIR="$HOME/.config/doto"
+VAULT_SECRET="$HOME/.config/doto/vault.secret"
+DOTFILES_DIR="$HOME/.doto"
 SSH_DIR="$HOME/.ssh"
-IS_FIRST_RUN="$HOME/.dotfiles_run"
+IS_FIRST_RUN="$HOME/.doto_run"
 
 # Install Ansible
 # check lsb_release -si
@@ -120,32 +120,32 @@ fi
 
 
 # Generate SSH keys
-if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
-    _task "Generating SSH keys"
-        _cmd "mkdir -p $SSH_DIR"
-        _cmd "chmod 700 $SSH_DIR"
-        _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
-        _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
-fi
+# if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
+#     _task "Generating SSH keys"
+#         _cmd "mkdir -p $SSH_DIR"
+#         _cmd "chmod 700 $SSH_DIR"
+#         _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
+#         _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
+# fi
 
 # Clone repository
-if ! [[ -d "$DOTFILES_DIR" ]]; then
-    _task "Cloning repository"
-        _cmd "git clone --quiet https://github.com/tigitlabs/dotfiles.git $DOTFILES_DIR"
-else
-    _task "Updating repository"
-        _cmd "git -C $DOTFILES_DIR pull --quiet"
-fi
-
-pushd "$DOTFILES_DIR" 2>&1 > /dev/null
+# if ! [[ -d "$DOTFILES_DIR" ]]; then
+#     _task "Cloning repository"
+#         _cmd "git clone --quiet https://github.com/tigitlabs/dotfiles.git $DOTFILES_DIR"
+# else
+#     _task "Updating repository"
+#         _cmd "git -C $DOTFILES_DIR pull --quiet"
+# fi
+chmod o-w /workspaces/doto/ansible
+pushd "./ansible" 2>&1 > /dev/null
 _task "Updating Galaxy"
     _cmd "ansible-galaxy install -r requirements.yml"
 
 _task "Running playbook"; _task_done
 if [[ -f $VAULT_SECRET ]]; then
-    ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@"
+    ansible-playbook --vault-password-file $VAULT_SECRET "main.yml" "$@"
 else
-    ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+    ansible-playbook "main.yml" "$@"
 fi
 
 popd 2>&1 > /dev/null
@@ -155,5 +155,3 @@ if ! [[ -f "$IS_FIRST_RUN" ]]; then
     echo -e "${ARROW} ${CYAN}Please reboot your computer to complete the setup.${NC}"
     touch "$IS_FIRST_RUN"
 fi
-
-# vi:ft=sh:
