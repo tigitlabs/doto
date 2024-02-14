@@ -10,19 +10,18 @@
       include_vars: "{{ item }}"
       with_fileglob:
         - "{{ playbook_dir }}/config.yml"
-      tags: ['always']
+      tags: ["always"]
 
   roles:
     - geerlingguy.pip
     - devsec.hardening.ssh_hardening
   vars:
+    ssh_server_ports: ["22"]
+    ssh_allow_tcp_forwarding: "yes"
+    sftp_enabled: true
     ssh_custom_options:
       - "Include /etc/ssh/ssh_config.d/*"
-    sshd_custom_options:
-      - "AcceptEnv LANG"
-    sftp_enabled: true
-      
+
   tasks:
     - import_tasks: tasks/extra-packages.yml
-      tags: ['extra-packages']
-
+      tags: ["extra-packages"]
