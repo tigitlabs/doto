@@ -97,7 +97,7 @@ if sudo -n true 2>/dev/null; then
 else
     echo "Cannot sudo without password"
     can_sudo=0
-    echo "Please run doto with `--ask-become-pass`"
+    echo "Please run doto with '--ask-become-pass'"
 fi
 
 

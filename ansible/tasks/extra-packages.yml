@@ -1,5 +1,14 @@
 ---
 
+- name: Install apt packages.
+  ansible.builtin.apt:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  loop: "{{ apt_packages }}"
+
 - name: Install global Pip packages.
   pip:
     name: "{{ item.name | default(item) }}"

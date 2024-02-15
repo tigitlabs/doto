@@ -9,5 +9,10 @@ apt_packages:
   - name: git
   - name: wget
   - name: curl
+  - name: htop
+  - name: unzip
+  - name: zip
+  - name: software-properties-common
+  
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
