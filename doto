@@ -90,6 +90,17 @@ DOTFILES_DIR="$HOME/.doto"
 SSH_DIR="$HOME/.ssh"
 IS_FIRST_RUN="$HOME/.doto_run"
 
+
+if sudo -n true 2>/dev/null; then
+    echo "Can sudo without password"
+    can_sudo=1
+else
+    echo "Cannot sudo without password"
+    can_sudo=0
+    echo "Please run doto with '--ask-become-pass'"
+fi
+
+
 # Install Ansible
 # check lsb_release -si
 if ! dpkg -s ansible >/dev/null 2>&1; then
@@ -116,6 +127,15 @@ fi
 if ! pip3 list | grep watchdog >/dev/null 2>&1; then
     _task "Installing Python3 Watchdog"
         _cmd "pip3 install watchdog"
+fi
+
+# Generate SSH keys
+if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
+    _task "Generating SSH keys"
+        _cmd "mkdir -p $SSH_DIR"
+        _cmd "chmod 700 $SSH_DIR"
+        _cmd "ssh-keygen -b 4096 -t rsa -f $SSH_DIR/id_rsa -N '' -C $USER@$HOSTNAME"
+         _cmd "cat $SSH_DIR/id_rsa.pub >> $SSH_DIR/authorized_keys"
 fi
 
 chmod o-w ./ansible
