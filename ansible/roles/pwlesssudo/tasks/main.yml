@@ -1,0 +1,6 @@
+---
+# tasks file for pwlesssudo
+
+- name: Running pwlesssudo role
+  ansible.builtin.debug:
+    msg: "Running pwlesssudo role"
