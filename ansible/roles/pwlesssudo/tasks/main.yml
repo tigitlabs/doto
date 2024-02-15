@@ -1,6 +1,8 @@
 ---
 # tasks file for pwlesssudo
 
-- name: Running pwlesssudo role
-  ansible.builtin.debug:
-    msg: "Running pwlesssudo role"
+- name: Adding non-root user
+  ansible.builtin.user:
+    name: "ubuntu"
+    state: "present"
+    uid: 1000
