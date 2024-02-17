@@ -1,0 +1,12 @@
+---
+- name: Verify
+  hosts: molecule
+  gather_facts: false
+  tasks:
+    - name: Check python version
+      ansible.builtin.command: python --version
+      register: python_version
+    - name: Assert python version
+      ansible.builtin.assert:
+        that:
+          - "'Python 3' in python_version.stdout"

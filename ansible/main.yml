@@ -20,24 +20,24 @@
   roles:
     - role: pwlesssudo
     - role: geerlingguy.pip
-    - role: geerlingguy.docker
-    - role: devsec.hardening.ssh_hardening
-      vars:
-        ssh_server_ports: ["22"]
-        ssh_allow_tcp_forwarding: "yes"
-        sftp_enabled: true
-        ssh_custom_options:
-          - "Include /etc/ssh/ssh_config.d/*"
+    # - role: geerlingguy.docker
+    # - role: devsec.hardening.ssh_hardening
+    #   vars:
+    #     ssh_server_ports: ["22"]
+    #     ssh_allow_tcp_forwarding: "yes"
+    #     sftp_enabled: true
+    #     ssh_custom_options:
+    #       - "Include /etc/ssh/ssh_config.d/*"
 
   tasks:
-    - name: Set authorized key
-      authorized_key:
-        user: "{{ ansible_env.USER }}"
-        state: present
-        key: https://github.com/tigitlabs.keys
+    # - name: Set authorized key
+    #   authorized_key:
+    #     user: "{{ ansible_env.USER }}"
+    #     state: present
+    #     key: https://github.com/tigitlabs.keys
 
-    - import_tasks: tasks/extra-packages.yml
-      tags: ['extra-packages']
+    # - import_tasks: tasks/extra-packages.yml
+    #   tags: ['extra-packages']
 
     - name: Run passwordless sudo role
       include_role:

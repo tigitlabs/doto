@@ -27,6 +27,12 @@ ci-yamllint:	## 🏃‍♂️ Run yamllint
 	@echo "🧪 yamllint"
 	@yamllint .
 
+.PHONY: ci-molecule
+ci-molecule:	## 🏃‍♂️ Run molecule
+	@echo "🧪 molecule"
+	@cd ansible/ && \
+	molecule test && \
+	cd ..
 
 .PHONY: ci-all
 ci-all:	## 🧪 Run all makefile targets
