@@ -10,8 +10,3 @@ platforms:
     path: ../Docker
     privileged: true
     command: ${MOLECULE_DOCKER_COMMAND:-""}
-
-#docker run -d 
-#--privileged 
-#-v /sys/fs/cgroup:/sys/fs/cgroup:ro 
-#centos:7 /usr/sbin/init

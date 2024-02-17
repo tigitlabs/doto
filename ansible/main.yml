@@ -16,11 +16,12 @@
       apt:
         name: openssh-server
         state: present
+        update_cache: yes
 
   roles:
     - role: pwlesssudo
     - role: geerlingguy.pip
-    # - role: geerlingguy.docker
+    - role: geerlingguy.docker
     # - role: devsec.hardening.ssh_hardening
     #   vars:
     #     ssh_server_ports: ["22"]
@@ -36,10 +37,10 @@
     #     state: present
     #     key: https://github.com/tigitlabs.keys
 
-    # - import_tasks: tasks/extra-packages.yml
-    #   tags: ['extra-packages']
+    - import_tasks: tasks/extra-packages.yml
+      tags: ["extra-packages"]
 
     - name: Run passwordless sudo role
       include_role:
         name: pwlesssudo
-      tags: ['dev']
+      tags: ["dev"]

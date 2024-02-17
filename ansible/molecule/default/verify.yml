@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: Check python version
-      ansible.builtin.command: python --version
+      ansible.builtin.command: python3 --version
       register: python_version
     - name: Assert python version
       ansible.builtin.assert:
