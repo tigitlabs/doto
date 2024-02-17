@@ -35,7 +35,7 @@
         user: "{{ ansible_env.USER }}"
         state: present
         key: https://github.com/tigitlabs.keys
-    
+
     - import_tasks: tasks/extra-packages.yml
       tags: ['extra-packages']
 

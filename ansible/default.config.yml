@@ -17,6 +17,6 @@ apt_packages:
   - name: software-properties-common
   - name: python3-pip
   - name: libssl-dev
-  
+
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
