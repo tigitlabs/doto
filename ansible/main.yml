@@ -19,7 +19,6 @@
         update_cache: true
 
   roles:
-    - role: pwlesssudo
     - role: geerlingguy.pip
     - role: geerlingguy.docker
     - role: devsec.hardening.ssh_hardening
@@ -41,7 +40,3 @@
     - import_tasks: tasks/extra-packages.yml
       tags: ["extra-packages"]
 
-    - name: Run passwordless sudo role
-      include_role:
-        name: pwlesssudo
-      tags: ["dev"]
