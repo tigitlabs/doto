@@ -27,6 +27,11 @@ ci-yamllint:	## 🏃‍♂️ Run yamllint
 	@echo "🧪 yamllint"
 	@yamllint .
 
+.PHONY: ci-ansible-syntax-check
+ci-ansible-syntax-check:	## 🏃‍♂️ Run ansible-syntax-check
+	@echo "🧪 ansible-syntax-check"
+	@ansible-playbook ansible/main.yml --syntax-check
+
 .PHONY: ci-molecule-test
 ci-molecule-test:	## 🏃‍♂️ Run molecule
 	@echo "🧪 molecule"
@@ -46,19 +51,17 @@ ci-run-in-docker:	## 🏃‍♂️ Run in Docker
 	@echo "🧪 Run in Docker"
 	@echo "🔨 Build Docker Image"
 	@docker build --tag doto/ubuntu2204:latest --file ansible/molecule/Docker/Dockerfile ansible/molecule/Docker/
-	@echo "🗑️ Remove old container"
-	@docker rm --force doto-ubuntu2204 || true
 	@echo "🏃‍♂️ Run Docker Container"
 	@docker run \
-	--name=doto-ubuntu2204 \
-	--user ubuntu \
+	--name doto-ubuntu2204 \
 	--detach \
 	--privileged \
 	--volume=/sys/fs/cgroup:/sys/fs/cgroup:rw \
-	--volume=`pwd`:/etc/ansible/roles/role_under_test:ro \
+	--volume=`pwd`:/home/ubuntu:ro \
 	--cgroupns=host \
 	doto/ubuntu2204:latest
 
 .PHONY: ci-all
 ci-all:	## 🧪 Run all makefile targets
 	@make ci-yamllint
+	@make ci-ansible-syntax-check
