@@ -46,21 +46,6 @@ ci-molecule-converge:	## 🏃‍♂️ Run molecule converge
 	molecule converge && \
 	cd ..
 
-.PHONY: ci-run-in-docker
-ci-run-in-docker:	## 🏃‍♂️ Run in Docker
-	@echo "🧪 Run in Docker"
-	@echo "🔨 Build Docker Image"
-	@docker build --tag doto/ubuntu2204:latest --file ansible/molecule/Docker/Dockerfile ansible/molecule/Docker/
-	@echo "🏃‍♂️ Run Docker Container"
-	@docker run \
-	--name doto-ubuntu2204 \
-	--detach \
-	--privileged \
-	--volume=/sys/fs/cgroup:/sys/fs/cgroup:rw \
-	--volume=`pwd`:/home/ubuntu:ro \
-	--cgroupns=host \
-	doto/ubuntu2204:latest
-
 .PHONY: ci-all
 ci-all:	## 🧪 Run all makefile targets
 	@make ci-yamllint
