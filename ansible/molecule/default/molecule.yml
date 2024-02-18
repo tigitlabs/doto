@@ -1,0 +1,12 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+platforms:
+  - name: molecule-ubuntu
+    image: doto/ubuntu2204:latest
+    pre_build_image: false
+    path: ../Docker
+    privileged: true
+    command: ${MOLECULE_DOCKER_COMMAND:-""}

@@ -1,0 +1,22 @@
+---
+downloads: ~/.ansible-downloads/
+
+pip_packages:
+  - name: cookiecutter
+    version: 2.5
+  - name: molecule
+
+apt_packages:
+  - name: git
+  - name: wget
+  - name: curl
+  - name: htop
+  - name: unzip
+  - name: zip
+  - name: tree
+  - name: software-properties-common
+  - name: python3-pip
+  - name: libssl-dev
+
+# Glob pattern to ansible task files to run after all other tasks are finished.
+post_provision_tasks: []

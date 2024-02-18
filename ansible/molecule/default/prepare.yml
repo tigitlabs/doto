@@ -1,0 +1,7 @@
+---
+- name: Prepare
+  hosts: molecule
+  gather_facts: false
+  tasks:
+    - name: Prepare playbook
+      ansible.builtin.meta: noop
