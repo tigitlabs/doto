@@ -27,12 +27,37 @@ ci-yamllint:	## 🏃‍♂️ Run yamllint
 	@echo "🧪 yamllint"
 	@yamllint .
 
-.PHONY: ci-molecule
-ci-molecule:	## 🏃‍♂️ Run molecule
+.PHONY: ci-molecule-test
+ci-molecule-test:	## 🏃‍♂️ Run molecule
 	@echo "🧪 molecule"
 	@cd ansible/ && \
 	molecule test && \
 	cd ..
+
+.PHONY: ci-molecule-converge
+ci-molecule-converge:	## 🏃‍♂️ Run molecule converge
+	@echo "🧪 molecule converge"
+	@cd ansible/ && \
+	molecule converge && \
+	cd ..
+
+.PHONY: ci-run-in-docker
+ci-run-in-docker:	## 🏃‍♂️ Run in Docker
+	@echo "🧪 Run in Docker"
+	@echo "🔨 Build Docker Image"
+	@docker build --tag doto/ubuntu2204:latest --file ansible/molecule/Docker/Dockerfile ansible/molecule/Docker/
+	@echo "🗑️ Remove old container"
+	@docker rm --force doto-ubuntu2204 || true
+	@echo "🏃‍♂️ Run Docker Container"
+	@docker run \
+	--name=doto-ubuntu2204 \
+	--user ubuntu \
+	--detach \
+	--privileged \
+	--volume=/sys/fs/cgroup:/sys/fs/cgroup:rw \
+	--volume=`pwd`:/etc/ansible/roles/role_under_test:ro \
+	--cgroupns=host \
+	doto/ubuntu2204:latest
 
 .PHONY: ci-all
 ci-all:	## 🧪 Run all makefile targets
