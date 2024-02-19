@@ -1,6 +1,14 @@
 # doto
 Dotfiles management with Python and Ansible
 
+## Setup for development
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Ansible
 
 ### Creating a new role

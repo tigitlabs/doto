@@ -1,0 +1,15 @@
+docker
+black
+flake8
+isort
+mypy
+pipenv
+pytest
+pytest-cov
+pytest-mock
+wheel
+ansible
+ansible-lint
+yamllint
+molecule
+molecule-plugins[docker]

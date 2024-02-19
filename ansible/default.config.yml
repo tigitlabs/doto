@@ -16,6 +16,7 @@ apt_packages:
   - name: tree
   - name: software-properties-common
   - name: python3-pip
+  - name: python3.10-venv
   - name: libssl-dev
 
 # Glob pattern to ansible task files to run after all other tasks are finished.

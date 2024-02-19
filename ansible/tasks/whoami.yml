@@ -1,0 +1,12 @@
+---
+- name: debug ansible_env
+  debug:
+    var: ansible_env
+- name: Register Current User
+  ansible.builtin.set_fact:
+    host_user: "{{ ansible_env.USER }}"
+  when: host_user is not defined
+
+- name: whoami
+  debug:
+    msg: "I am {{ host_user }}"

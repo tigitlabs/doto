@@ -1,6 +1,7 @@
 ---
 - name: Configure host.
   hosts: all
+  become: true
 
   vars_files:
     - default.config.yml
@@ -12,15 +13,24 @@
         - "{{ playbook_dir }}/config.yml"
       tags: ["always"]
 
+    - name: Run whoami
+      ansible.builtin.import_tasks: tasks/whoami.yml
+      tags: ["always"]
+
     - name: Install ssh server with apt
       apt:
         name: openssh-server
         state: present
         update_cache: true
+      tags: ["never"]
 
   roles:
+    - role: tigitlabs.doto_collection.github_cli
     - role: geerlingguy.pip
     - role: geerlingguy.docker
+      vars:
+        docker_service_state: started
+        docker_users: "{{ ansible_env.USER }}"
     - role: devsec.hardening.ssh_hardening
       vars:
         ssh_server_ports: ["22"]
@@ -31,9 +41,8 @@
 
   tasks:
     - name: Set authorized key
-      # TODO; Remove hardcoded user
       authorized_key:
-        user: "ubuntu"
+        user: "{{ ansible_env.USER }}"
         state: present
         key: https://github.com/tigitlabs.keys
 

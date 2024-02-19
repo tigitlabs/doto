@@ -6,5 +6,6 @@ rules:
     max: 200
     level: warning
 ignore:
-  - "ansible/roles/geerlingguy.pip/"
-  - "ansible/roles/geerlingguy.docker/"
+  - "ansible/roles/"
+  - "ansible/collections/"
+  - ".venv/"
