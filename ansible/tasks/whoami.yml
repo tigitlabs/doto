@@ -1,7 +1,5 @@
 ---
-- name: debug ansible_env
-  debug:
-    var: ansible_env
+
 - name: Register Current User
   ansible.builtin.set_fact:
     host_user: "{{ ansible_env.USER }}"
@@ -9,4 +7,4 @@
 
 - name: whoami
   debug:
-    msg: "I am {{ host_user }}"
+    msg: "whoami: {{ host_user }}"

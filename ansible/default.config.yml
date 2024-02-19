@@ -1,6 +1,9 @@
 ---
 downloads: ~/.ansible-downloads/
 
+default_roles:
+  - tigitlabs.doto_collection.github_cli
+
 pip_packages:
   - name: cookiecutter
     version: 2.5
