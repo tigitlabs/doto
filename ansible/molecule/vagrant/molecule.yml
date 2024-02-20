@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+  options:
+    ansible_connection: ssh
+
+platforms:
+  - name: doto-focal64
+    box: ubuntu/focal64
+
+provisioner:
+  name: ansible
+  log: true
+  config_options:
+    defaults:
+      host_key_checking: false

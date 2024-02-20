@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: doto-focal64
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Assert ansible_kernel label is set
+      ansible.builtin.assert:
+        that: ansible_kernel is defined
+        msg: "The ansible_kernel variable is not defined, set gather_facts: true in your playbook."
