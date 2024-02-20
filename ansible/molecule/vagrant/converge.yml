@@ -8,3 +8,10 @@
       ansible.builtin.assert:
         that: ansible_kernel is defined
         msg: "The ansible_kernel variable is not defined, set gather_facts: true in your playbook."
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+- name: Run main playbook
+  ansible.builtin.import_playbook: ../../main.yml
+  become: true
