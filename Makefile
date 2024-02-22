@@ -27,6 +27,11 @@ ci-yamllint:	## 🏃‍♂️ Run yamllint
 	@echo "🧪 yamllint"
 	@yamllint .
 
+.PHONY: ci-ansible-lint
+ci-ansible-lint:	## 🏃‍♂️ Run ansible-lint
+	@echo "🧪 ansible-lint"
+	@ansible-lint ansible/main.yml
+
 .PHONY: ci-ansible-syntax-check
 ci-ansible-syntax-check:	## 🏃‍♂️ Run ansible-syntax-check
 	@echo "🧪 ansible-syntax-check"
@@ -49,4 +54,5 @@ ci-molecule-converge:	## 🏃‍♂️ Run molecule converge
 .PHONY: ci-all
 ci-all:	## 🧪 Run all makefile targets
 	@make ci-yamllint
+	@make ci-ansible-lint
 	@make ci-ansible-syntax-check
