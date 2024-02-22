@@ -5,6 +5,6 @@
     host_user: "{{ ansible_env.USER }}"
   when: host_user is not defined
 
-- name: whoami
-  debug:
+- name: Run whoami
+  ansible.builtin.debug:
     msg: "whoami: {{ host_user }}"

@@ -6,6 +6,5 @@ rules:
     max: 200
     level: warning
 ignore:
-  - "ansible/roles/"
-  - "ansible/collections/"
+  - "ansible/galaxy/"
   - ".venv/"

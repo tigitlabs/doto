@@ -43,11 +43,13 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
+        run: pip3 install -r requirements.txt
 
-      - name: Run molecule tests.
+      - name: Run playbook
         run: |
-          make ci-molecule-test
+          cd ansible
+          ansible-galaxy install -r requirements.yml
+          ansible-playbook main.yml
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

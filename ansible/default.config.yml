@@ -3,16 +3,18 @@ downloads: ~/.ansible-downloads/
 
 default_roles:
   - tigitlabs.doto_collection.github_cli
+  - tigitlabs.doto_collection.secure_boot_machine_owner_key
+  - tigitlabs.doto_collection.virtualbox
+  - tigitlabs.doto_collection.vagrant
 
 pip_packages:
-  - name: cookiecutter
-    version: 2.5
-  - name: molecule
+  - name: virtualenv
 
 apt_packages:
   - name: git
   - name: wget
   - name: curl
+  - name: vim
   - name: htop
   - name: unzip
   - name: zip
@@ -21,6 +23,7 @@ apt_packages:
   - name: python3-pip
   - name: python3.10-venv
   - name: libssl-dev
+  - name: dkms
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []

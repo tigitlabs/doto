@@ -1,8 +1,7 @@
-docker
-wheel
 ansible==9.2.0
 molecule==24.2.0
 molecule-plugins[vagrant]==23.5.3
-molecule-plugins[docker]==23.5.3
 ansible-lint
 yamllint
+docker
+
