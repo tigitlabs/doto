@@ -1,35 +1,20 @@
 ---
-- name: Fail if molecule group is missing
-  hosts: localhost
-  tasks:
-    - name: Assert group existence
-      ansible.builtin.assert:
-        that: "'molecule' in groups"
-        fail_msg: |
-          molecule group was not found inside inventory groups: {{ groups }}
 
-- name: Wait for systemd to complete initialization.  # noqa 303
-  hosts: molecule
+- name: Converge
+  hosts: all
   become: true
   tasks:
-    - name: Wait for systemd to complete initialization
-      command: systemctl is-system-running
-      register: systemctl_status
-      until: >
-        'running' in systemctl_status.stdout or
-        'degraded' in systemctl_status.stdout
-      retries: 30
-      delay: 5
-      when: ansible_service_mgr == 'systemd'
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
+
+- name: "Prepare Collection"
+  hosts: "localhost"
+  connection: "local"
+  tasks:
+    - name: "Run ansible-galaxy"
+      ansible.builtin.command: "ansible-galaxy install --force -r ../../requirements.yml"
       changed_when: false
-      failed_when: systemctl_status.rc > 1
 
-    - name: Create privilege separation directory
-      # This is required for sshd to start.
-      # Only required for testing with Docker.
-      ansible.builtin.file:
-        path: /run/sshd
-        state: directory
-
-- name: Run playbook
-  ansible.builtin.import_playbook: ../../main.yml
+- ansible.builtin.import_playbook: ../../main.yml
