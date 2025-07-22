@@ -1,7 +1,7 @@
 ---
-- name: Prepare
+- name: Cleanup
   hosts: molecule
   gather_facts: false
   tasks:
-    - name: Prepare playbook
+    - name: Cleanup playbook
       ansible.builtin.meta: noop

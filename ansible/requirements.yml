@@ -7,7 +7,3 @@ collections:
   - name: community.general
   - name: ansible.posix
   - name: devsec.hardening
-  - name: doto_collection
-    type: git
-    source: https://github.com/tigitlabs/doto-collection
-    version: main
