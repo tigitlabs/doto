@@ -24,6 +24,7 @@ apt_packages:
   - name: python3.10-venv
   - name: libssl-dev
   - name: dkms
+  - name: jq
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []

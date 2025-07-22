@@ -67,3 +67,13 @@
       with_items: "{{ run_roles }}"
       tags:
         - always
+
+- name: User space
+  hosts: all
+  become: false
+  gather_facts: true
+
+  roles:
+    - role: tigitlabs.doto_collection.ohmybash
+      vars:
+        ohmybash_theme: "nwinkler"

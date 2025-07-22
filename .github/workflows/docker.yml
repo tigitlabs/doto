@@ -1,0 +1,17 @@
+---
+name: Docker Tests
+'on':
+  pull_request:
+    branches:
+      - dev
+  schedule:
+    - cron: "0 7 * * 0"
+
+jobs:
+
+  build_and_test:
+    name: Build and Test Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
