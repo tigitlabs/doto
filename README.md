@@ -61,7 +61,3 @@ VBoxManage list runningvms | cut -d '"' -f 2 | xargs -I {} VBoxManage controlvm 
     - <https://github.com/ansible/molecule/discussions/3914>
     - geerlingguy ansible playbook testing
   - Have a dir with shared molecule files like prepare.yml
-
-- 2024-02-22:
-  - molecule test does not create a box, I have to run molecule converge first.
-  - virtulabox got installed and was signed automatically, need to figure out why. dpkg package?
