@@ -36,10 +36,6 @@ A default can be set or the option `--package-manager` can be provided
 
 ### Setup for development
 
-```bash
-source setup.sh
-```
-
 ## Ansible
 
 Running ansible playbook
