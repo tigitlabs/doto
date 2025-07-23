@@ -17,7 +17,43 @@ The backend for the first version will be `Ansible` but with an abstaraction lay
 - CLI to manage and view manifest file.
 - Sync the manifest to a remote repository via `Git`
 - Besides packages one can also choose to add and apply an `Ansible Role` which is maintained and tested in a separate repository.
+
 - Testing and Dry run. By using the test tools available for `Ansible` one can add a package in a dry-run and create a VM to apply the new manifest to verify that the outcome is a expected.
+Command could be `doto deploy host`
+
+Future:
+- The tool manages a local manifest file on each host to avoid to keep track of packages that are already installed.
+
+
+
+## Data Structures
+
+Overview of Data Structures:
+
+- Manifest file
+  - Hosts
+
+- Host
+  - Name
+  - Platform
+    - rpi
+    - vm
+    - x86
+    - arm
+
+  - Tags:
+    - coding
+    - workstation
+    - laptop
+    - video_editing
+  - Packages
+
+Packages don't require any configuration besides installing them.
+
+- Package
+  - name
+  - version
+  - comment
 
 ### Commands
 

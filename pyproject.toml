@@ -12,7 +12,12 @@ dependencies = [
     "typer (>=0.16.0,<0.17.0)",
 ]
 
+#[project.scripts]
+[tool.poetry.scripts]
+doto = "doto.cli:app"
+
 [tool.poetry]
+package-mode = true
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
@@ -20,6 +25,7 @@ invoke = "^2.2.0"
 mkdocs = "^1.6.1"
 ruff = "^0.12.4"
 pre-commit = "^4.2.0"
+mypy = "^1.17.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
