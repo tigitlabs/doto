@@ -22,7 +22,8 @@
         "streetsidesoftware.code-spell-checker",
         "ms-python.python",
         "mechatroner.rainbow-csv",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "ms-python.mypy-type-checker"
       ]
     }
   },
