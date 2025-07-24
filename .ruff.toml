@@ -1,5 +1,4 @@
 
-cache-dir = "~/.cache/ruff"
 exclude = [
     ".git"
 ]
