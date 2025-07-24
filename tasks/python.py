@@ -6,7 +6,7 @@ def lint(c):
     """
     Run linting checks
     """
-    c.run("poetry run ruff check")
+    c.run("poetry run ruff check --config .ruff.toml")
 
 
 @task

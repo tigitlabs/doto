@@ -1,0 +1,24 @@
+
+cache-dir = "~/.cache/ruff"
+exclude = [
+    ".git"
+]
+
+include = [
+    "src/**/*.py",
+    "tests/**/*.py",
+    "tasks/**/*.py"
+]
+
+
+# Without E501, ruff will not check for line length
+line-length = 120
+extend-select = ["E501"]
+
+indent-width = 4
+
+[format]
+quote-style = "double"
+indent-style = "space"
+
+docstring-code-format = true
