@@ -9,6 +9,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
   vim \
   python3 \
   python3-pip \
+  python3-apt \
   pipx \
   # Clean up
   && apt-get autoremove -y && apt-get clean -y
