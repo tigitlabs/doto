@@ -20,6 +20,7 @@ RUN pipx install \
   poetry \
   && pipx ensurepath
 ENV POETRY_HOME=/home/vscode/.local/bin
+ENV POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES=true
 ENV PATH="${PATH}:${POETRY_HOME}"
 
 WORKDIR  /workspaces/doto/
