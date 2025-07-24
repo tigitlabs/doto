@@ -12,8 +12,7 @@ dependencies = [
     "typer (>=0.16.0,<0.17.0)",
 ]
 
-#[project.scripts]
-[tool.poetry.scripts]
+[project.scripts]
 doto = "doto.cli:app"
 
 [tool.poetry]
