@@ -70,6 +70,10 @@ A default can be set or the option `--package-manager` can be provided
 
 ## Development
 
+`docker build -t doto-ci .`
+`docker run --rm -v $PWD:/workspaces/doto -w /workspaces/doto doto-ci bash -c 'poetry run inv python.ci'`
+`docker run --rm -v $PWD:/workspaces/doto -w /workspaces/doto --user $(id -u):$(id -g) doto-ci bash -c 'poetry run inv python.ci'`
+
 ### Setup for development
 
 ## Ansible
