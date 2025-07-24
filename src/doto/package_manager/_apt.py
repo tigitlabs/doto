@@ -2,8 +2,6 @@
 # https://salsa.debian.org/apt-team/python-apt
 
 import apt_pkg
-import apt
-
 
 def main():
     apt_pkg.init_config()
@@ -18,7 +16,3 @@ def main():
     # Now print the URI of every item.
     for item in acquire.items:
         print(item.desc_uri)
-
-
-if __name__ == "__main__":
-    main()
